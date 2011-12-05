@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import java.util.ArrayList;
 
 // DAVID: Problem hier: Das Skriptum sagt: "Beispielsweise können wir keine Instanz
 // eines Typparameters erzeugen und kein Array anlegen, das Instanzen eines
@@ -8,31 +9,31 @@ import java.util.Iterator;
 // Statt Array einfach eine Liste nehmen?
 
 
-public class Stack implements Iterable<Integer> {
-	private int[] array;
+public class Stack<T> implements Iterable<T> {
+	private ArrayList<T> array;
 	private int pointer; // Index des ersten freien Feldes
 
 	public Stack(int maxCapacity) {
-		this.array = new int[maxCapacity];
+		this.array = new ArrayList<T>(maxCapacity);
 		this.pointer = 0;
 	}
 
-	public void push(int value) { array[pointer++] = value; }
+	public void push(T value) { array.add(pointer++, value); }
 
-	public int pop() { return array[--pointer]; }
+	public T pop() { return array.get(--pointer); }
 	
-	public Iterator<Integer> iterator() { return new StackIterator(); }
+	public Iterator<T> iterator() { return new StackIterator(); }
 
 	// Als innere Klasse, damit auf die private-Objektvariablen der
 	// Eltern-Klasse zugegriffen werden kann
-	private class StackIterator implements Iterator<Integer> {
+	private class StackIterator implements Iterator<T> {
 		int index;
 
 		StackIterator() { index = 0; }
 	
 		public boolean hasNext() { return index < pointer; }
 	
-		public Integer next() { return array[index++]; }
+		public T next() { return array.get(index++); }
 	
 		public void remove() {
 			// Optionale Methode, wird hier nicht unterstuetzt.
