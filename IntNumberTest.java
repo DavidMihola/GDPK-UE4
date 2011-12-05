@@ -16,5 +16,11 @@ public class IntNumberTest {
 		java.util.Collections.sort(list);
 		for (IntNumber i : list)
 			System.out.println(i.get());
+
+		System.out.println();
+
+		java.util.Collections.sort(list, new IntNumberComparator());
+		for (IntNumber i : list)
+			System.out.println(i.get());
 	}
 }
