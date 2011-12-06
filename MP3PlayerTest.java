@@ -10,8 +10,14 @@ public class MP3PlayerTest {
 			year++;
 		}
 
+		System.out.println("Rufe MP3Player.year(732) // 1. Jänner 1982, kein Schaltjahr");
+		System.out.println("Ergebnis: " + MP3Player.year(732));
+
 		System.out.println("Rufe MP3Player.year(731) // 31. Dezember 1981, kein Schaltjahr");
 		System.out.println("Ergebnis: " + MP3Player.year(731));
+
+		System.out.println("Rufe MP3Player.year(367) // 1. Jänner 1981, kein Schaltjahr");
+		System.out.println("Ergebnis: " + MP3Player.year(367));
 
 		System.out.println("Rufe MP3Player.year(366) // 31. Dezember 1980, ein Schaltjahr");
 		System.out.println("Ergebnis: " + MP3Player.year(366));
