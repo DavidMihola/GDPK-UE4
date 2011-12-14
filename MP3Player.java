@@ -24,17 +24,15 @@ public class MP3Player {
 		// while (days > 365) {
 
 		while ( days > 366 || (!isLeapYear(year) && days > 365)) {
-		// sollte logisch äquivalent sein zu deiner Lösung:
-		// while (days > 365 && (!isLeapYear(year) || days > 366)) {
-		// und ist meiner Ansicht nach einfacher zu verstehen:
-		// entweder das aktuelle year ist ein Schaltjahr und es reichen daher days > 365,
+		// wenn days größer ist als 366, geht sich auf jeden Fall noch ein weiteres Jahr aus,
+		// auch wenn es sich um ein Schaltjahr handelt;
+		// wenn das aktuelle Jahr kein Schaltjahr ist, reichen auch days > 365,
 		// um ein neues Jahr anzufangen
-		// oder es sind noch mehr als 366 Tage, die reichen auf jeden Fall für ein neues Jahr
 
-		assert(days < olddays);
-		// nachdem das gesichert ist, wird der Wert von days für später nach olddays übertragen:
-		olddays = days;
-		// jetzt kann days geändert werden
+			assert(days < olddays);
+			// nachdem das gesichert ist, wird der Wert von days für später nach olddays übertragen:
+			olddays = days;
+			// jetzt kann days geändert werden
 
 			if (isLeapYear(year)) {
 				if (days > 366) {
@@ -46,8 +44,8 @@ public class MP3Player {
 				year += 1;
 			}
 
-		// am Ende der Schleife muss sich der Wert in days wiederum verringert haben:
-		assert(days < olddays);
+			// am Ende der Schleife muss sich der Wert in days wiederum verringert haben:
+			assert(days < olddays);
 		}
 
 		assert(days < olddays) && !( days > 366 || (!isLeapYear(year) && days > 365));
