@@ -10,7 +10,19 @@ public class MP3Player {
 
 		int year = 1980;
 
+		// Die Invariante soll sein: In jeder Interation ist der Wert in
+		// olddays höher als der in days. Im weiteren Verlauf wird in olddays
+		// immer der Wert gespeichert, den days im vorigen Schleifendurchlauf
+		// hatte. Das heißt also, dass days mit jedem Durchlauf weniger werden
+		// muss - damit ist die Termination sichergestellt.
+		// Zu Beginn wird olddays künstlich auf einen Wert größer als days gesetzt:
+		int olddays = days + 1;
 		
+		assert(days < olddays);
+
+		// zum Vergleich die falsche Lösung:
+		// while (days > 365) {
+
 		while ( days > 366 || (!isLeapYear(year) && days > 365)) {
 		// sollte logisch äquivalent sein zu deiner Lösung:
 		// while (days > 365 && (!isLeapYear(year) || days > 366)) {
@@ -18,6 +30,12 @@ public class MP3Player {
 		// entweder das aktuelle year ist ein Schaltjahr und es reichen daher days > 365,
 		// um ein neues Jahr anzufangen
 		// oder es sind noch mehr als 366 Tage, die reichen auf jeden Fall für ein neues Jahr
+
+		assert(days < olddays);
+		// nachdem das gesichert ist, wird der Wert von days für später nach olddays übertragen:
+		olddays = days;
+		// jetzt kann days geändert werden
+
 			if (isLeapYear(year)) {
 				if (days > 366) {
 					days -= 366;
@@ -27,7 +45,12 @@ public class MP3Player {
 				days -= 365;
 				year += 1;
 			}
+
+		// am Ende der Schleife muss sich der Wert in days wiederum verringert haben:
+		assert(days < olddays);
 		}
+
+		assert(days < olddays) && !( days > 366 || (!isLeapYear(year) && days > 365));
 
 		return year;
 	}
